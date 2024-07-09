@@ -1,0 +1,74 @@
+{
+    "family": "harness-delegate-task-spec",
+    "containerDefinitions": [
+        {
+            "name": "ecs-delegate-im",
+            "image": "harness/delegate:24.06.83304",
+            "cpu": 1,
+            "memory": 2048,
+            "portMappings": [],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DELEGATE_TAGS",
+                    "value": ""
+                },
+                {
+                    "name": "MANAGER_HOST_AND_PORT",
+                    "value": "https://app.harness.io/gratis"
+                },
+                {
+                    "name": "DELEGATE_TOKEN",
+                    "value": ""
+                },
+                {
+                    "name": "NEXT_GEN",
+                    "value": "true"
+                },
+                {
+                    "name": "ACCOUNT_ID",
+                    "value": ""
+                },
+                {
+                    "name": "DELEGATE_NAME",
+                    "value": "ecs-delegate"
+                },
+                {
+                    "name": "DELEGATE_TYPE",
+                    "value": "DOCKER"
+                },
+                {
+                    "name": "LOG_STREAMING_SERVICE_URL",
+                    "value": "https://app.harness.io/gratis/log-service/"
+                },
+                {
+                    "name": "DEPLOY_MODE",
+                    "value": "KUBERNETES"
+                },
+                {
+                    "name": "INIT_SCRIPT",
+                    "value": ""
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/harness-delegate-task-spec",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "systemControls": []
+        }
+    ],
+    "executionRoleArn": "arn:aws:iam::149554801296:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "6144"
+}
