@@ -4,11 +4,12 @@
         {
             "name": "cartservice",
             "image": "gcr.io/google-samples/microservices-demo/cartservice:v0.3.8",
-            "cpu": 300,
+            "cpu": 205,
             "memory": 128,
-            "memoryReservation": 64,
+            "memoryReservation": 65,
             "portMappings": [
                 {
+                    "name": "cartservice-7070-tcp",
                     "containerPort": 7070,
                     "hostPort": 7070,
                     "protocol": "tcp"
@@ -29,7 +30,8 @@
                     "awslogs-group": "/ecs/cartservice",
                     "awslogs-region": "us-east-2",
                     "awslogs-stream-prefix": "ecs"
-                }
+                },
+                "secretOptions": []
             },
             "healthCheck": {
                 "command": [
@@ -41,6 +43,24 @@
                 "retries": 3,
                 "startPeriod": 60
             },
+            "systemControls": []
+        },
+        {
+            "name": "chaos-agent",
+            "image": "docker.io/harness/chaos-go-runner:ecs-latest",
+            "cpu": 205,
+            "memory": 512,
+            "memoryReservation": 512,
+            "portMappings": [],
+            "essential": false,
+            "entryPoint": [
+                "sh",
+                "-c",
+                "sleep 1000000"
+            ],
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
             "systemControls": []
         }
     ],
