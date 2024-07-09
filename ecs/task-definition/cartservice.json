@@ -1,4 +1,55 @@
 {
-    "name": "CART_SERVICE_ADDR",
-    "value": "cartservice,:boutique.local7070"
-},
+    "family": "cartservice",
+    "containerDefinitions": [
+        {
+            "name": "cartservice",
+            "image": "gcr.io/google-samples/microservices-demo/cartservice:v0.3.8",
+            "cpu": 300,
+            "memory": 128,
+            "memoryReservation": 64,
+            "portMappings": [
+                {
+                    "containerPort": 7070,
+                    "hostPort": 7070,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "REDIS_ADDR",
+                    "value": "redis-cart.boutique.local:6379"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/cartservice",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "/bin/grpc_health_probe -addr=:7070 -rpc-timeout=5s"
+                ],
+                "interval": 10,
+                "timeout": 5,
+                "retries": 3,
+                "startPeriod": 60
+            },
+            "systemControls": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::149554801296:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::149554801296:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024"
+}
