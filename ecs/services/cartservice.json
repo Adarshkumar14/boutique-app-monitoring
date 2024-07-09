@@ -1,0 +1,36 @@
+{
+    "launchType": "FARGATE",
+    "serviceName": "cartservice",
+    "desiredCount": 1,
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "securityGroups": [
+                "sg-0e0aa016f16a9f1e7"
+            ],
+            "subnets": [
+                "subnet-09f68cc991d61014f"
+            ],
+            "assignPublicIp": "ENABLED"
+        }
+
+    },
+    "serviceConnectConfiguration": {
+        "enabled": true,
+        "namespace": "arn:aws:servicediscovery:us-east-2:149554801296:namespace/ns-x7yt6cuiimd2cccv",
+        "services": [],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/cartservice",
+                "awslogs-create-group": "true",
+                "awslogs-region": "us-east-2",
+                "awslogs-stream-prefix": "ecs"
+            },
+            "secretOptions": []
+        }
+    },
+    "deploymentConfiguration": {
+        "maximumPercent": 100,
+        "minimumHealthyPercent": 0
+    }
+}
