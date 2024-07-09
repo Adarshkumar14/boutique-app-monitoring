@@ -70,6 +70,6 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "2000",
-    "memory": "2024"
+    "cpu": "512",
+    "memory": "1024"
 }
