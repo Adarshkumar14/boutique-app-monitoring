@@ -71,5 +71,5 @@
         "FARGATE"
     ],
     "cpu": "512",
-    "memory": "1024"
+    "memory": "2024"
 }
